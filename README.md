@@ -21,7 +21,7 @@
 
    - 선택된 단어를 표시
 
-    [소스코드](gui_selectedword_window.py)
+   [소스코드](gui_selectedword_window.py)
 
 ------
 실행화면
