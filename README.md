@@ -1,6 +1,6 @@
 # Capston_Dicture-Pen
 캡스톤 디자인
------
+------
 1. Main Window
 
   - Words table Menu
@@ -23,6 +23,7 @@
 
     [소스코드](gui_selectedword_window.py)
 
+------
 실행화면
 
 ![Main_Window](ref_images/menu.png)
@@ -30,5 +31,5 @@
 ![Explain_Word](ref_images/word_mean.png)
 ![Selected Word](ref_images/Selected_Word.png)
 
-
+-------
 GUI, Python, PyQt5
