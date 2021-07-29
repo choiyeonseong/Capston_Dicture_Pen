@@ -13,7 +13,8 @@ class wordwindow(QtWidgets.QWidget):
         self.__show_word()
 
     def __show_word(self):
-
+        
+        # 상단 버튼 표시
         pause_button = QPushButton("pause")
         pause_button.setIcon(QIcon(QPixmap("icon/pause.png")))
         pause_button.clicked.connect(self.speaker_sound_pause)
@@ -29,7 +30,7 @@ class wordwindow(QtWidgets.QWidget):
         innerLayout.addWidget(pause_button)
         innerLayout.addWidget(stop_button)
 
-
+        # 단어 테이블 표시
         self.table = QtWidgets.QTableWidget(self)
         self.table.resize(400, 230)
         self.table.setColumnCount(3)
@@ -39,7 +40,7 @@ class wordwindow(QtWidgets.QWidget):
 
         self.table.setRowHeight(0, 200)
         self.table.setItem(0, 0, QTableWidgetItem(self.s_word))
-
+        
         speaker_button = QPushButton()
         speaker_button.setIcon(QIcon(QPixmap("icon/speaker.png")))
         self.table.setCellWidget(0, 1, speaker_button)
@@ -49,7 +50,7 @@ class wordwindow(QtWidgets.QWidget):
 
         # self.table.resizeColumnsToContents()
         # self.table.resizeRowsToContents()
-
+        
         layout = QGridLayout(self)
         layout.addLayout(innerLayout, 0, 0)
         layout.addWidget(self.table, 1, 0)
@@ -74,8 +75,6 @@ class wordwindow(QtWidgets.QWidget):
         print(send)
         print("stop")
 
-
-
 def selected_window(word,mean):
     app = QApplication(sys.argv)
     Window = wordwindow(word,mean)
@@ -84,14 +83,12 @@ def selected_window(word,mean):
     Window.show()
     sys.exit(app.exec())
 
-
-
-
 if __name__=="__main__":
     word='empty'
     mean='empty'
     selected_window(word,mean)
-# def selected_window(word,mean):
+
+    # def selected_window(word,mean):
 
     # app=QApplication(sys.argv)
     # word='empty'
