@@ -40,13 +40,13 @@ class tablewindow(QtWidgets.QWidget):
         # #label
         # self.lbl=QLabel()
 
-        #checkAll
+        # 체크박스 전체 선택
         self.checkBoxAll = QtWidgets.QCheckBox("Select All")
         self.checkBoxAll.setChecked(False)
         self.checkBoxAll.stateChanged.connect(self.onStateChangePrincipal)
         self.checkboxes=[]
 
-        #play
+        # 재생, 일시정지, 멈춤 버튼
         playAll_button = QPushButton("play all")
         # playAll_button.setGeometry(10,10,0,0)
         playAll_button.setIcon(QIcon(QPixmap("icon/speaker.png")))
@@ -60,6 +60,7 @@ class tablewindow(QtWidgets.QWidget):
         stop_button.setIcon(QIcon(QPixmap("icon/stop.png")))
         stop_button.clicked.connect(self.speaker_sound_stop)
 
+        # 볼륨 조절
         self.slider=QSlider(Qt.Horizontal)
         self.slider.setRange(1,5)
         self.slider.setSingleStep(1)
@@ -67,18 +68,17 @@ class tablewindow(QtWidgets.QWidget):
         self.slider.valueChanged.connect(self.showValue)
 
 
-        #table
+        # 테이블
         self.table=QtWidgets.QTableWidget()
         self.table.resize(1000,500)
         self.table.setColumnCount(4)
         self.table.setRowCount(len(self.words))
 
+        self.table.horizontalHeader().setVisible(False)  # table헤더설정
 
-        self.table.horizontalHeader().setVisible(False)  #table헤더설정
+        self.table.cellClicked.connect(self.__mycell_clicked)   # 선택된 테이블 정보 표시
 
-        self.table.cellClicked.connect(self.__mycell_clicked)
-
-        #layout 설정
+        # layout 설정
         innerLayout=QHBoxLayout()
         innerLayout.setContentsMargins(0,0,300,0)
         innerLayout.addStretch(1)
@@ -96,8 +96,7 @@ class tablewindow(QtWidgets.QWidget):
 
         self.setLayout(layout)
 
-
-
+        
     def setTable(self):
         #table 내용
         for i in range(len(self.words)):
@@ -111,10 +110,8 @@ class tablewindow(QtWidgets.QWidget):
             # self.table.resizeRowsToContents()
             self.table.resizeColumnsToContents()
 
-
             for checkbox in self.checkboxes:
                 checkbox.stateChanged.connect(self.onStateChange)
-
 
             #word
             self.table.setItem(i, 1, QTableWidgetItem(self.words[i]))
@@ -127,15 +124,12 @@ class tablewindow(QtWidgets.QWidget):
 
             self.table.setColumnWidth(1, 50)
 
-
-
             #mean,example
             self.table.setItem(i, 2, QTableWidgetItem(self.means[i]))
             self.table.setColumnWidth(2, 300)
 
             self.table.setItem(i, 3, QTableWidgetItem(self.examples[i]))
             self.table.setColumnWidth(3, 400)
-
 
             self.table.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
@@ -151,6 +145,7 @@ class tablewindow(QtWidgets.QWidget):
         else:
             return
 
+    # 체크박스 상태 변화
     @QtCore.pyqtSlot(int)
     def onStateChangePrincipal(self, state):
         if state == QtCore.Qt.Checked:
@@ -180,10 +175,6 @@ class tablewindow(QtWidgets.QWidget):
                 print(txt)
                 time.sleep(self.slider.value())
 
-
-
-
-
     #speaker_button2_clicked
     def speaker_sound_each(self,row):
         def speak():
@@ -203,10 +194,9 @@ class tablewindow(QtWidgets.QWidget):
         want = self.table.item(row, 1).text()
         print("stop-", want)
 
-
+    # 볼륨 값 변화 표시
     def showValue(self):
         print(str(self.slider.value()))
-
 
 if __name__=="__main__":
 
